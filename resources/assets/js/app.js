@@ -7,16 +7,26 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import marked from 'marked';
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+// マークダウンをプレビュー画面に表示する
+$(function() {
+	marked.setOptions({
+		langPrefix: '',
+		breaks : true,
+		sanitize: true,
+	});
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+	$('#markdown_editor_textarea').keyup(function() {
+		var html = marked(getHtml($(this).val()));
+		$('#markdown_preview').html(html);
+	});
 
-const app = new Vue({
-    el: '#app'
+	// 比較演算子が &lt; 等になるので置換
+	function getHtml(html) {
+		html = html.replace(/&lt;/g, '<');
+		html = html.replace(/&gt;/g, '>');
+		html = html.replace(/&amp;/g, '&');
+		return html;
+	}
 });
