@@ -1,13 +1,11 @@
 @extends('layouts.common')
 @section('content')
 <form class="post-page-wrapper" action="/drafts/new" method="post">
-@csrf
-
+{{ csrf_field() }}
     @if($errors->first('title'))
         <div class="validation">{{ $errors->first('title') }}</div>
     @endif
     <input type="text" class="form-control m-1" id="title-input" placeholder="タイトル" name="title">
-
     @if($errors->first('tags'))
         <div class="validation">{{ $errors->first('tags') }}</div>
     @endif
@@ -16,7 +14,6 @@
     @if($errors->first('body'))
         <div class="validation">{{ $errors->first('article') }}</div>
     @endif
-    
     <div class="row">
         <div class="col-6 m-1">
             <textarea name="article" id="markdown_editor_textarea" cols="30" rows="10" class="form-control"></textarea>
