@@ -19,6 +19,6 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "marked": "^0.7.0"
+        "marked": "^4.0.10"
     }
 }
